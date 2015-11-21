@@ -1,0 +1,135 @@
+<html>
+<head><title>Search by birth</title></head>
+<body>
+<?php
+$sex=$_POST['sex'];
+switch ($sex)
+{
+	case 'm':
+		male();
+		break;
+	case 'f':
+		female();
+		break;
+	case 'b':
+		both();
+		break;
+	default:
+		exit("unable to find choice");
+}
+?>
+<?php
+function male()
+{
+	$yy=$_POST['yy'];
+ 	$top=$_POST['top'];
+	print "year = ".$yy."<br>";
+	print "top = ".$top."<br>";
+	$st="male_cy$yy"."_top.csv";
+	echo $st."<br>";
+	$dir=opendir('C:\xampp\htdocs\mini');
+	if(is_dir($dir)!==FALSE)
+	{
+	while($file=readdir($dir)) 
+	{
+		if($file==$st)
+		{ 
+			$f=fopen("$file","r");
+			while(!feof($f))
+			{
+				$line_of_text=fgetcsv($f,1024);
+				if($line_of_text[2]<=$top)
+				{
+					echo "<BR>",$line_of_text[0],",",$line_of_text[1],",",$line_of_text[2];
+				}
+			}
+			fclose($f);
+		}	 
+
+    	}
+    	closedir($dir);
+	}
+	else
+	{
+		print "WRONG PATH IS GIVEN\n";
+		exit;
+	}
+}
+function female()
+{
+	$yy=$_POST['yy'];
+	$top=$_POST['top'];
+	print "year = ".$yy."<br>";
+	print "top = ".$top."<br>";
+	$st="female_cy$yy"."_top.csv";
+	echo $st."<br>";
+	$dir=opendir('C:\xampp\htdocs\mini');
+	if(is_dir($dir)!==FALSE)
+	{
+	while($file=readdir($dir)) 
+	{
+		if($file==$st)
+		{ 
+			$f=fopen("$file","r");
+			while(!feof($f))
+			{
+				$line_of_text=fgetcsv($f,1024);
+				if($line_of_text[2]<=$top)
+				{
+					echo "<BR>",$line_of_text[0],",",$line_of_text[1],",",$line_of_text[2];
+				}
+			}
+			fclose($f);
+		}	 
+
+    	}
+    	closedir($dir);
+	}
+	else
+	{
+		print "WRONG PATH IS GIVEN\n";
+		exit;
+	}
+}
+function both()
+{
+	$yy=$_POST['yy'];
+	$top=$_POST['top'];
+	print "year = ".$yy."<br>";
+	print "top = ".$top."<br>";
+	$st1="male_cy$yy"."_top.csv";
+	$st2="female_cy$yy"."_top.csv";
+	echo $st1."<br>";
+	echo $st2."<br>";
+	$dir=opendir('C:\xampp\htdocs\mini');
+	if(is_dir($dir)!==FALSE)
+	{
+	while($file=readdir($dir)) 
+	{
+
+		if(($file==$st1)||($file==$st2))
+		{ 
+			$f=fopen("$file","r");
+			while(!feof($f))
+			{
+				$line_of_text=fgetcsv($f,1024);
+				if($line_of_text[2]<=$top)
+				{
+					echo "<BR>",$line_of_text[0],",",$line_of_text[1],",",$line_of_text[2];
+				}
+			}
+			fclose($f);
+		}
+			 
+    	}
+    	closedir($dir);
+	}
+	else
+	{
+		print "WRONG PATH IS GIVEN\n";
+		exit;
+	}
+}
+?>	
+</body>
+</html>
