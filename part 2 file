@@ -1,9 +1,9 @@
 <html>
-<head><title>part2</title>	
+<head><title>Search for Popularity of a name that has changed over the Year</title>	
 </head>
 <body>
 <?php
-echo $sex=$_POST['sex'];
+$sex=$_POST['sex'];
 switch ($sex)
 {
 	case 'm2':
@@ -25,33 +25,35 @@ function male2()
 {
 	$yy=$_POST['yy'];
  	$nm=$_POST['nm'];
-	echo $yy."<br>";
-	echo $nm."<br>";
+	echo "YEAR = ".$yy."<br>";
+	echo "NAME = ".$nm."<br>";
 	$st="male_cy$yy"."_top.csv";
 	$dir=opendir('C:\xampp\htdocs\mini');
 	if(is_dir($dir)!==FALSE)
 	{
-	while(($file=readdir($dir))&&($yy<='2013')) 
+	while($yy<='2013')
 	{
 		$st="male_cy$yy"."_top.csv";
-		while($file!='male_cy2013_top.csv')
+		while($file=readdir($dir)) 
 		{
-		if($st==$file)
-		{ 
-			$f=fopen("$st","r");
-			while(!feof($f))
-			{
-				$line_of_text=fgetcsv($f,1024);
-				if($line_of_text[0]==$nm)
+			if($file==$st)
+			{ 
+				$f=fopen("$file","r");
+				while(!feof($f))
 				{
-					echo "<BR>",$line_of_text[0],",",$line_of_text[1],",",$line_of_text[2];
+					$line_of_text=fgetcsv($f,1024);
+					if($line_of_text[0]==$nm)
+					{
+						echo "<BR>",$line_of_text[0],",",$line_of_text[1],",",$line_of_text[2];
+						break;
+					}
 				}
-			}
-			fclose($f);
-		}
-		}
-		$yy=$yy+1;
-    	}
+				echo "hello";
+				fclose($f);
+			}	
+    		}
+		$yy=$yy+1;	
+	}
     	closedir($dir);
 	}
 	else
@@ -63,31 +65,36 @@ function male2()
 function female2()
 {
 	$yy=$_POST['yy'];
-	$top=$_POST['nm'];
-	print "year = ".$yy."<br>";
-	print "top = ".$top."<br>";
+ 	$nm=$_POST['nm'];
+	echo "YEAR = ".$yy."<br>";
+	echo "NAME = ".$nm."<br>";
 	$st="female_cy$yy"."_top.csv";
-	echo $st."<br>";
 	$dir=opendir('C:\xampp\htdocs\mini');
 	if(is_dir($dir)!==FALSE)
 	{
-	while($file=readdir($dir)) 
+	while($yy<='2013')
 	{
-		if($file==$st)
-		{ 
-			$f=fopen("$file","r");
-			while(!feof($f))
-			{
-				$line_of_text=fgetcsv($f,1024);
-				if($line_of_text[2]<=$top)
+		$st="female_cy$yy"."_top.csv";
+		while($file=readdir($dir)) 
+		{
+			if($file==$st)
+			{ 
+				$f=fopen("$file","r");
+				
+				while(!feof($f))
 				{
-					echo "<BR>",$line_of_text[0],",",$line_of_text[1],",",$line_of_text[2];
+					$line_of_text=fgetcsv($f,1024);
+					if($line_of_text[0]==$nm)
+					{
+						echo "<BR>",$line_of_text[0],",",$line_of_text[1],",",$line_of_text[2];
+						break;
+					}
 				}
-			}
-			fclose($f);
-		}	 
-
-    	}
+				fclose($f);
+			}	
+    		}
+		$yy=$yy+1;	
+	}
     	closedir($dir);
 	}
 	else
@@ -99,34 +106,38 @@ function female2()
 function both2()
 {
 	$yy=$_POST['yy'];
-	$top=$_POST['top'];
-	print "year = ".$yy."<br>";
-	print "top = ".$top."<br>";
+ 	$nm=$_POST['nm'];
+	echo "YEAR = ".$yy."<br>";
+	echo "NAME = ".$nm."<br>";
 	$st1="male_cy$yy"."_top.csv";
 	$st2="female_cy$yy"."_top.csv";
-	echo $st1."<br>";
-	echo $st2."<br>";
 	$dir=opendir('C:\xampp\htdocs\mini');
 	if(is_dir($dir)!==FALSE)
 	{
-	while($file=readdir($dir)) 
+	while($yy<='2013')
 	{
-
-		if(($file==$st1)||($file==$st2))
-		{ 
-			$f=fopen("$file","r");
-			while(!feof($f))
-			{
-				$line_of_text=fgetcsv($f,1024);
-				if($line_of_text[2]<=$top)
+		$st1="male_cy$yy"."_top.csv";
+		$st2="female_cy$yy"."_top.csv";
+		while($file=readdir($dir)) 
+		{
+			if(($file==$st1)||($file==$st2))
+			{ 
+				$f=fopen("$file","r");
+				
+				while(!feof($f))
 				{
-					echo "<BR>",$line_of_text[0],",",$line_of_text[1],",",$line_of_text[2];
+					$line_of_text=fgetcsv($f,1024);
+					if($line_of_text[0]==$nm)
+					{
+						echo "<BR>",$line_of_text[0],",",$line_of_text[1],",",$line_of_text[2];
+						break;
+					}
 				}
-			}
-			fclose($f);
-		}
-			 
-    	}
+				fclose($f);
+			}	
+    		}
+		$yy=$yy+1;	
+	}
     	closedir($dir);
 	}
 	else
@@ -136,8 +147,5 @@ function both2()
 	}
 }
 ?>
-
-
-		
 </body>
 </html>
