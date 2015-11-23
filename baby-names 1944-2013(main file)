@@ -2,7 +2,7 @@
 <head><title>Search by birth</title>
 	<form name="form1" method="post" action="check1.php">
 	<B>Enter your choice :</B><br>
-	<B>1 for Popular names by Birth Year<br>2 for Popularity of a name that has changed over the Year</B><br>
+	<B><U><I><p style="color:red;text-align:center;font:monotype corsiva">1 FOR POPULAR NAMES BY BIRTH YEAR<br>2 FOR POPULARITY OF A NAME THAT HAS CHANGED OVER THE YEAR</p></I></U></B><br>
 	<input type="text" value=" " name="ch"></B><br>
 	<input type="submit" name="submit1">
 	</form>
@@ -27,14 +27,14 @@
 	<?php
 		function part1()
 		{?>
-		<FORM NAME="form1" METHOD="POST" ACTION="demo.php">
-<B>Enter your choice for sex :<BR><input type="radio" name="sex" value="m" checked>Male<BR></B>
-<B><input type="radio" name="sex" value="f" checked>Female<BR></B>
-<B><input type="radio" name="sex" value="b" checked>Both<BR></B>
-<p><B>Enter year you want to search between 1944 and 2013 :<br><input type="text" value="Enter here" name="yy"></B></p>
-<p><B>Enter the top list you want :<br><input type="text" value="enter here" name="top"></B></p>
-<INPUT TYPE="submit">
-</FORM>	
+			<FORM NAME="form1" METHOD="POST" ACTION="demo.php">
+			<B>Enter your choice for sex :<BR><input type="radio" name="sex" value="m" checked>Male<BR></B>
+			<B><input type="radio" name="sex" value="f" checked>Female<BR></B>
+			<B><input type="radio" name="sex" value="b" checked>Both<BR></B>
+			<p><B>Enter year you want to search between 1944 and 2013 :<br><input type="text" value="" name="yy"></B></p>
+			<p><B>Enter the top list you want :<br><input type="text" value="" name="top"></B></p>
+			<INPUT TYPE="submit">
+			</FORM>	
 		<?php
 		}
 		?>	
@@ -42,16 +42,16 @@
 		function part2()
 		{?>
 			<FORM NAME="form2" METHOD="POST" ACTION="sample.php">
-	<B>Enter your choice for sex :</B><BR>
-	<input type="radio" name="sex" value="m2" checked><B>Male</B><BR>
-	<input type="radio" name="sex" value="f2" checked><B>Female</B><BR>
-	<input type="radio" name="sex" value="b2" checked><B>Both</B><BR>
-	<B>Enter year you want to search between 1944 and 2013 :</B><br>
-	<input type="text" value=" " name="yy"><BR>
-	<B>Enter the name you want to discover :</B><br>
-	<input type="text" value=" " name="nm"><br>
-	<INPUT TYPE="Submit">
-	</FORM>
+			<B>Enter your choice for sex :</B><BR>
+			<input type="radio" name="sex" value="m2" checked><B>Male</B><BR>
+			<input type="radio" name="sex" value="f2" checked><B>Female</B><BR>
+			<input type="radio" name="sex" value="b2" checked><B>Both</B><BR>
+			<B>Enter year you want to search between 1944 and 2013 :</B><br>
+			<input type="text" value="" name="yy"><BR>
+			<B>Enter the name you want to discover :</B><br>
+			<input type="text" value="" name="nm"><br>
+			<INPUT TYPE="Submit">
+			</FORM>
 		<?php
 		}
 		?>
