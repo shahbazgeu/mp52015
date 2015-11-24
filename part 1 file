@@ -1,5 +1,6 @@
 <html>
-<head><title>Search by birth</title></head>
+<head><title>Search by birth</title>
+</head>
 <body>
 <?php
 $sex=$_POST['sex'];
@@ -23,6 +24,7 @@ function male()
 {
 	$yy=$_POST['yy'];
  	$top=$_POST['top'];
+	$c=0;
 	print "year = ".$yy."<br>";
 	print "top = ".$top."<br>";
 	$st="male_cy$yy"."_top.csv";
@@ -34,18 +36,29 @@ function male()
 	{
 		if($file==$st)
 		{ 
+			echo "<html><body><table>\n\n";
 			$f=fopen("$file","r");
-			while(!feof($f))
+			while(($line=fgetcsv($f))!==false)
 			{
-				$line_of_text=fgetcsv($f,1024);
-				if($line_of_text[2]<=$top)
+				
+				if($c<=$top)
 				{
-					echo "<BR>",$line_of_text[0],",",$line_of_text[1],",",$line_of_text[2];
+					echo"<tr>";
+					foreach($line as $cell)
+					{
+						echo "<td>".htmlspecialchars($cell)."</td>";
+					}
+					echo "</tr>\n";
 				}
+				else
+				{
+					break;
+				}
+				$c++;
 			}
 			fclose($f);
+			echo"\n</table></body></html>";
 		}	 
-
     	}
     	closedir($dir);
 	}
@@ -70,18 +83,23 @@ function female()
 	{
 		if($file==$st)
 		{ 
+			echo "<html><body><table>\n\n";
 			$f=fopen("$file","r");
-			while(!feof($f))
+			while(($line=fgetcsv($f))!==false)
 			{
-				$line_of_text=fgetcsv($f,1024);
-				if($line_of_text[2]<=$top)
+				if(($line[2]<=$top)||($line[2]=='Position'))
 				{
-					echo "<BR>",$line_of_text[0],",",$line_of_text[1],",",$line_of_text[2];
+					echo"<tr>";
+					foreach($line as $cell)
+					{
+						echo "<td>".htmlspecialchars($cell)."</td>";
+					}
+					echo "</tr>\n";
 				}
 			}
 			fclose($f);
-		}	 
-
+			echo"\n</table></body></html>";			 
+		}
     	}
     	closedir($dir);
 	}
@@ -109,16 +127,22 @@ function both()
 
 		if(($file==$st1)||($file==$st2))
 		{ 
+			echo "<html><body><table>\n\n";
 			$f=fopen("$file","r");
-			while(!feof($f))
+			while(($line=fgetcsv($f))!==false)
 			{
-				$line_of_text=fgetcsv($f,1024);
-				if($line_of_text[2]<=$top)
+				if(($line[2]<=$top)||($line[2]=='Position'))
 				{
-					echo "<BR>",$line_of_text[0],",",$line_of_text[1],",",$line_of_text[2];
+					echo"<tr>";
+					foreach($line as $cell)
+					{
+						echo "<td>".htmlspecialchars($cell)."</td>";
+					}
+					echo "</tr>\n";
 				}
 			}
 			fclose($f);
+			echo"\n</table></body></html>";
 		}
 			 
     	}
