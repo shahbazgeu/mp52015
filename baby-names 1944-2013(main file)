@@ -1,13 +1,15 @@
 <html>
 <head><title>Search by birth</title>
+<h1><p style="color:#6e6e6e;text-align:center"><B><I><U>BABIES NAME 1944-2013</U></I></B><p></h1>
+<p style="color:brown">WELCOME TO THE DATABASE OF BABIES.<br>YOU CAN SEARCH FOR THEIR NAMES,RANK AND POPULATION FOR A GIVEN YEAR PROVIDED BY THE USER.</p> 
 	<form name="form1" method="post" action="check1.php">
-	<B>Enter your choice :</B><br>
-	<B><U><I><p style="color:red;text-align:center;font:monotype corsiva">1 FOR POPULAR NAMES BY BIRTH YEAR<br>2 FOR POPULARITY OF A NAME THAT HAS CHANGED OVER THE YEAR</p></I></U></B><br>
+	<p style="text-align=center;color=white"><B>ENTER FROM THE STATEMENT GIVEN BELOW :</B></p>
+	<B><I><p style="color:white;text-align:left;fonts:monotype corsiva">1 FOR POPULAR NAMES BY BIRTH YEAR<br>2 FOR POPULARITY OF A NAME THAT HAS CHANGED OVER THE YEAR</p></I></B>
 	<input type="text" value=" " name="ch"></B><br>
 	<input type="submit" name="submit1">
 	</form>
 </head>
-<body>
+<body background="children_boy.jpg">
 	<?php
 		$ch=$_POST['ch'];
 		echo $ch;
@@ -19,8 +21,8 @@
 			case 2:
 				part2();
 				break;
-			default:
-			echo "Wrong choice";
+			default :
+			print "\nWrong choice";
 			exit;
 		}
 	?>
