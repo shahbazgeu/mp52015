@@ -25,126 +25,107 @@ function male2()
 {
 	$yy=$_POST['yy'];
  	$nm=$_POST['nm'];
-	echo "YEAR = ".$yy."<br>";
-	echo "NAME = ".$nm."<br>";
-	$st="male_cy$yy"."_top.csv";
-	$dir=opendir('C:\xampp\htdocs\mini');
-	if(is_dir($dir)!==FALSE)
+	$max=2013;
+	echo "YOUR GIVEN YEAR = ".$yy."<br>";
+	echo "NAME TO BE SEARCH = ".$nm."<br>";
+	echo "CHANGES OCCURS IN THE POSITION OF ".$nm." FROM THE YEAR ".$yy." TO 2013"."<br>";
+	$d='/xampp/htdocs/mini';
+	while($yy<=$max)
 	{
-	while($yy<='2013')
-	{
-		$st="male_cy$yy"."_top.csv";
-		while($file=readdir($dir)) 
+		$dir=opendir($d);
+		while(($file=readdir($dir))!== false)
 		{
+			$st="male_cy$yy"."_top.csv";
 			if($file==$st)
 			{ 
+				echo "<html><body><table>\n\n";
 				$f=fopen("$file","r");
-				while(!feof($f))
+				while(($line=fgetcsv($f))!=FALSE)
 				{
-					$line_of_text=fgetcsv($f,1024);
-					if($line_of_text[0]==$nm)
+					if($line[0]==$nm)
 					{
-						echo "<BR>",$line_of_text[0],",",$line_of_text[1],",",$line_of_text[2];
+						print "$yy    -    $line[2]";
 						break;
 					}
 				}
-				echo "hello";
 				fclose($f);
-			}	
-    		}
+				echo"\n</table></body></html>";
+			}
+		}
+		closedir($dir);
 		$yy=$yy+1;	
-	}
-    	closedir($dir);
-	}
-	else
-	{
-		print "WRONG PATH IS GIVEN\n";
-		exit;
-	}
+    	}	
 }
 function female2()
 {
 	$yy=$_POST['yy'];
  	$nm=$_POST['nm'];
-	echo "YEAR = ".$yy."<br>";
-	echo "NAME = ".$nm."<br>";
-	$st="female_cy$yy"."_top.csv";
-	$dir=opendir('C:\xampp\htdocs\mini');
-	if(is_dir($dir)!==FALSE)
+	$max=2013;
+	echo "YOUR GIVEN YEAR = ".$yy."<br>";
+	echo "NAME TO BE SEARCH = ".$nm."<br>";
+	echo "CHANGES OCCURS IN THE POSITION OF ".$nm." FROM THE YEAR ".$yy." TO 2013"."<br>";
+	$d='/xampp/htdocs/mini';
+	while($yy<=$max)
 	{
-	while($yy<='2013')
-	{
-		$st="female_cy$yy"."_top.csv";
-		while($file=readdir($dir)) 
+		$dir=opendir($d);
+		while(($file=readdir($dir))!== false)
 		{
+			$st="female_cy$yy"."_top.csv";
 			if($file==$st)
 			{ 
+				echo "<html><body><table>\n\n";
 				$f=fopen("$file","r");
-				
-				while(!feof($f))
+				while(($line=fgetcsv($f))!=FALSE)
 				{
-					$line_of_text=fgetcsv($f,1024);
-					if($line_of_text[0]==$nm)
+					if($line[0]==$nm)
 					{
-						echo "<BR>",$line_of_text[0],",",$line_of_text[1],",",$line_of_text[2];
+						print "$yy    -    $line[2]";
 						break;
 					}
 				}
 				fclose($f);
-			}	
-    		}
+				echo"\n</table></body></html>";
+			}
+		}
+		closedir($dir);
 		$yy=$yy+1;	
-	}
-    	closedir($dir);
-	}
-	else
-	{
-		print "WRONG PATH IS GIVEN\n";
-		exit;
-	}
+    	}
 }
 function both2()
 {
 	$yy=$_POST['yy'];
  	$nm=$_POST['nm'];
-	echo "YEAR = ".$yy."<br>";
-	echo "NAME = ".$nm."<br>";
-	$st1="male_cy$yy"."_top.csv";
-	$st2="female_cy$yy"."_top.csv";
-	$dir=opendir('C:\xampp\htdocs\mini');
-	if(is_dir($dir)!==FALSE)
+	$max=2013;
+	echo "YOUR GIVEN YEAR = ".$yy."<br>";
+	echo "NAME TO BE SEARCH = ".$nm."<br>";
+	echo "CHANGES OCCURS IN THE POSITION OF ".$nm." FROM THE YEAR ".$yy." TO 2013"."<br>";
+	$d='/xampp/htdocs/mini';
+	while($yy<=$max)
 	{
-	while($yy<='2013')
-	{
-		$st1="male_cy$yy"."_top.csv";
-		$st2="female_cy$yy"."_top.csv";
-		while($file=readdir($dir)) 
+		$dir=opendir($d);
+		while(($file=readdir($dir))!== false)
 		{
+			$st1="male_cy$yy"."_top.csv";
+			$st2="female_cy$yy"."_top.csv";
 			if(($file==$st1)||($file==$st2))
 			{ 
+				echo "<html><body><table>\n\n";
 				$f=fopen("$file","r");
-				
-				while(!feof($f))
+				while(($line=fgetcsv($f))!=FALSE)
 				{
-					$line_of_text=fgetcsv($f,1024);
-					if($line_of_text[0]==$nm)
+					if($line[0]==$nm)
 					{
-						echo "<BR>",$line_of_text[0],",",$line_of_text[1],",",$line_of_text[2];
+						print "$yy    -    $line[2]";
 						break;
 					}
 				}
 				fclose($f);
-			}	
-    		}
+				echo"\n</table></body></html>";
+			}
+		}
+		closedir($dir);
 		$yy=$yy+1;	
-	}
-    	closedir($dir);
-	}
-	else
-	{
-		print "WRONG PATH IS GIVEN\n";
-		exit;
-	}
+    	}
 }
 ?>
 </body>
