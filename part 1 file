@@ -72,6 +72,7 @@ function female()
 {
 	$yy=$_POST['yy'];
 	$top=$_POST['top'];
+        $c=0;
 	print "year = ".$yy."<br>";
 	print "top = ".$top."<br>";
 	$st="female_cy$yy"."_top.csv";
@@ -87,7 +88,7 @@ function female()
 			$f=fopen("$file","r");
 			while(($line=fgetcsv($f))!==false)
 			{
-				if(($line[2]<=$top)||($line[2]=='Position'))
+				if($c<=$top)
 				{
 					echo"<tr>";
 					foreach($line as $cell)
@@ -96,6 +97,11 @@ function female()
 					}
 					echo "</tr>\n";
 				}
+				else
+				{
+					break;
+				}
+				$c++;
 			}
 			fclose($f);
 			echo"\n</table></body></html>";			 
@@ -113,6 +119,7 @@ function both()
 {
 	$yy=$_POST['yy'];
 	$top=$_POST['top'];
+        $c=0;
 	print "year = ".$yy."<br>";
 	print "top = ".$top."<br>";
 	$st1="male_cy$yy"."_top.csv";
@@ -131,7 +138,7 @@ function both()
 			$f=fopen("$file","r");
 			while(($line=fgetcsv($f))!==false)
 			{
-				if(($line[2]<=$top)||($line[2]=='Position'))
+				if($c<=$top)
 				{
 					echo"<tr>";
 					foreach($line as $cell)
@@ -140,6 +147,11 @@ function both()
 					}
 					echo "</tr>\n";
 				}
+				else
+				{
+					break;
+				}
+				$c++;
 			}
 			fclose($f);
 			echo"\n</table></body></html>";
