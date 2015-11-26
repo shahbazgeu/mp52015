@@ -1,7 +1,9 @@
 <html>
 <head><title>Search for Popularity of a name that has changed over the Year</title>	
+<h1><p style="color:grey;text-align:center;font-family:Bernard MT Condensed;"><I><U>MALE AND FEMALE BABY NAME DATABASE</U></I></p></h1>
+<h2><p style="color:white;text-align:left;font-family:TIMES NEW ROMAN;"><I><U>Search for Popularity of a name that has changed over the Year</U></I></p></h2>
 </head>
-<body>
+<body background="cute_baby.jpg">
 <?php
 $sex=$_POST['sex'];
 switch ($sex)
@@ -16,7 +18,7 @@ switch ($sex)
 		both2();
 		break;
 	default:
-		print "\nunable to find choice";
+		print "UNABLE TO FIND CHOICE";
 		exit;
 }
 ?>
@@ -26,9 +28,10 @@ function male2()
 	$yy=$_POST['yy'];
  	$nm=$_POST['nm'];
 	$max=2013;
-	echo "YOUR GIVEN YEAR = ".$yy."<br>";
-	echo "NAME TO BE SEARCH = ".$nm."<br>";
-	echo "CHANGES OCCURS IN THE POSITION OF ".$nm." FROM THE YEAR ".$yy." TO 2013"."<br>";
+	$f=0;
+	echo '<span style="color:#AFA;font-family:Rockwell Extra Bold;">YOUR GIVEN YEAR = </span>'.$yy."<br>";
+	echo '<span style="color:#AFA;font-family:Rockwell Extra Bold;">NAME TO BE SEARCH = </span>'.$nm."<br>";
+	echo '<span style="color:#AFA;font-family:Rockwell Extra Bold;">CHANGES OCCURS IN THE POSITION OF </span>'.$nm.'<span style="color:#AFA;font-family:Rockwell Extra Bold;"> FROM THE YEAR </span>'.$yy.'<span style="color:#AFA;font-family:Rockwell Extra Bold;">  TO 2013 IN MALE BABIES</span>'."<br>";
 	$d='/xampp/htdocs/mini';
 	while($yy<=$max)
 	{
@@ -38,32 +41,36 @@ function male2()
 			$st="male_cy$yy"."_top.csv";
 			if($file==$st)
 			{ 
-				echo "<html><body><table>\n\n";
 				$f=fopen("$file","r");
-				while(($line=fgetcsv($f))!=FALSE)
+				while(($line=fgetcsv($f))!==FALSE)
 				{
 					if($line[0]==$nm)
 					{
-						print "$yy    -    $line[2]";
+						echo "$yy -> $line[2]"."<br>";
+						$f=1;
 						break;
 					}
 				}
-				fclose($f);
-				echo"\n</table></body></html>";
 			}
 		}
 		closedir($dir);
 		$yy=$yy+1;	
-    	}	
+    	}
+	if($f==0)
+	{
+		echo "<br>"."SORRY ITS NOT A MALE NAME"."<br>";
+		exit;
+	}	
 }
 function female2()
 {
 	$yy=$_POST['yy'];
  	$nm=$_POST['nm'];
 	$max=2013;
-	echo "YOUR GIVEN YEAR = ".$yy."<br>";
-	echo "NAME TO BE SEARCH = ".$nm."<br>";
-	echo "CHANGES OCCURS IN THE POSITION OF ".$nm." FROM THE YEAR ".$yy." TO 2013"."<br>";
+	$f=0;
+	echo '<span style="color:#AFA;font-family:Rockwell Extra Bold;">YOUR GIVEN YEAR = </span>'.$yy."<br>";
+	echo '<span style="color:#AFA;font-family:Rockwell Extra Bold;">NAME TO BE SEARCH = </span>'.$nm."<br>";
+	echo '<span style="color:#AFA;font-family:Rockwell Extra Bold;">CHANGES OCCURS IN THE POSITION OF </span>'.$nm.'<span style="color:#AFA;font-family:Rockwell Extra Bold;"> FROM THE YEAR </span>'.$yy.'<span style="color:#AFA;font-family:Rockwell Extra Bold;">  TO 2013 IN FEMALE BABIES</span>'."<br>";
 	$d='/xampp/htdocs/mini';
 	while($yy<=$max)
 	{
@@ -73,32 +80,38 @@ function female2()
 			$st="female_cy$yy"."_top.csv";
 			if($file==$st)
 			{ 
-				echo "<html><body><table>\n\n";
 				$f=fopen("$file","r");
 				while(($line=fgetcsv($f))!=FALSE)
 				{
 					if($line[0]==$nm)
 					{
-						print "$yy    -    $line[2]";
+						echo "$yy -> $line[2]"."<br>";
+						$f=1;
 						break;
 					}
 				}
 				fclose($f);
-				echo"\n</table></body></html>";
 			}
 		}
 		closedir($dir);
 		$yy=$yy+1;	
     	}
+	if($f==0)
+	{
+		echo "<br>"."SORRY ITS NOT A FEMALE NAME"."<br>";
+		exit;
+	}
 }
 function both2()
 {
 	$yy=$_POST['yy'];
  	$nm=$_POST['nm'];
 	$max=2013;
-	echo "YOUR GIVEN YEAR = ".$yy."<br>";
-	echo "NAME TO BE SEARCH = ".$nm."<br>";
-	echo "CHANGES OCCURS IN THE POSITION OF ".$nm." FROM THE YEAR ".$yy." TO 2013"."<br>";
+	$f1=0;
+	$f2=0;
+	echo '<span style="color:#AFA;font-family:Rockwell Extra Bold;">YOUR GIVEN YEAR = </span>'.$yy."<br>";
+	echo '<span style="color:#AFA;font-family:Rockwell Extra Bold;">NAME TO BE SEARCH = </span>'.$nm."<br>";
+	echo '<span style="color:#AFA;font-family:Rockwell Extra Bold;">CHANGES OCCURS IN THE POSITION OF </span>'.$nm.'<span style="color:#AFA;font-family:Rockwell Extra Bold;"> FROM THE YEAR </span>'.$yy.'<span style="color:#AFA;font-family:Rockwell Extra Bold;">  TO 2013 IN BABIES</span>'."<br>";
 	$d='/xampp/htdocs/mini';
 	while($yy<=$max)
 	{
@@ -107,7 +120,23 @@ function both2()
 		{
 			$st1="male_cy$yy"."_top.csv";
 			$st2="female_cy$yy"."_top.csv";
-			if(($file==$st1)||($file==$st2))
+			if($file==$st1)
+			{ 
+				
+				$f=fopen("$file","r");
+				while(($line=fgetcsv($f))!=FALSE)
+				{
+					if($line[0]==$nm)
+					{
+						echo "$yy -> $line[2]"."<br>";
+						$f=1;
+						break;
+					}
+				}
+				fclose($f);
+				
+			}
+			if($file==$st2)
 			{ 
 				echo "<html><body><table>\n\n";
 				$f=fopen("$file","r");
@@ -116,6 +145,7 @@ function both2()
 					if($line[0]==$nm)
 					{
 						print "$yy    -    $line[2]";
+						$f2=1;
 						break;
 					}
 				}
@@ -126,6 +156,14 @@ function both2()
 		closedir($dir);
 		$yy=$yy+1;	
     	}
+	if($f1==0)
+	{
+		echo "<br>"."IT IS NOT A MALE BABY NAME"."<br>";
+	}
+	if($f2==0)
+	{
+		echo "<br>"."IT IS NOT A FEMALE BABY NAME"."<br>";
+	}
 }
 ?>
 </body>
