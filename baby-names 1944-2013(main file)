@@ -1,18 +1,16 @@
 <html>
 <head><title>Search by birth</title>
-<h1><p style="color:#6e6e6e;text-align:center"><B><I><U>BABIES NAME 1944-2013</U></I></B><p></h1>
+<h1><p style="color:black;text-align:center"><B><I><U>BABY NAMES 1944-2013</U></I></B><p></h1>
 <p style="color:brown">WELCOME TO THE DATABASE OF BABIES.<br>YOU CAN SEARCH FOR THEIR NAMES,RANK AND POPULATION FOR A GIVEN YEAR PROVIDED BY THE USER.</p> 
 	<form name="form1" method="post" action="check1.php">
-	<p style="text-align=center;color=white"><B>ENTER FROM THE STATEMENT GIVEN BELOW :</B></p>
+	<p style="text-align=center;color=#6e6e6e"><B>ENTER FROM THE STATEMENT GIVEN BELOW :</B></p>
 	<B><I><p style="color:white;text-align:left;fonts:monotype corsiva">1 FOR POPULAR NAMES BY BIRTH YEAR<br>2 FOR POPULARITY OF A NAME THAT HAS CHANGED OVER THE YEAR</p></I></B>
-	<input type="text" value=" " name="ch"></B><br>
+	<input type="text" name="ch"></B><br>
 	<input type="submit" name="submit1">
 	</form>
-</head>
 <body background="children_boy.jpg">
 	<?php
 		$ch=$_POST['ch'];
-		echo $ch;
 		switch ($ch)
 		{
 			case 1:
@@ -22,8 +20,8 @@
 				part2();
 				break;
 			default :
-			print "\nWrong choice";
-			exit;
+				echo "Wrong choice";
+				exit;
 		}
 	?>
 	<?php
@@ -57,5 +55,7 @@
 		<?php
 		}
 		?>
+<p style="color:grey;text-align:center;font-family:TIMES NEW ROMAN;"><I><U>THIS SITE IS DESIGNED ONLY FOR THE PURPOSE OF MINI PROJECT</U></I></p>
+</head>
 </body>
 </html>
