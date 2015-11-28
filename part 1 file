@@ -1,37 +1,46 @@
 <html>
 <head><title>Search by birth</title>
-</head>
-<body>
+<h1><p style="color:grey;text-align:center;font-family:TIMES NEW ROMAN;"><I><U>MALE AND FEMALE BABY NAME DATABASE</U></I></p></h1>
+<h2><p style="color:green;text-align:left;font-family:Impact;"><I><U>POPULAR NAMES BY BIRTH YEAR</U></I></p><p style="color:green;text-align:right;font-family:Impact;"><I><U>AND THEIR INFORMATION LIST</U></I></p></h2>
+<body background="cute_baby_boy.jpg">
 <?php
+$yy=$_POST['yy'];
+$top=$_POST['top'];
 $sex=$_POST['sex'];
+if($yy<1944)
+{
+	echo '<span style="color:purple;font-family:Arial Black;">.........SORRY WRONG YEAR IS PROVIDED BY THE USER........</span>'."<br>";
+	exit;
+}
+else if($yy>2013)
+{
+	echo '<span style="color:purple;font-family:Arial Black;">.........LIMIT YEAR EXCEEDED.........</span>'."<br>";
+	exit;
+}
 switch ($sex)
 {
 	case 'm':
-		male();
+		male($yy,$top);
 		break;
 	case 'f':
-		female();
+		female($yy,$top);
 		break;
 	case 'b':
-		both();
+		both($yy,$top);
 		break;
 	default:
 		exit("unable to find choice");
 }
 ?>
 <?php
-function male()
+function male($yy,$top)
 {
-	$yy=$_POST['yy'];
- 	$top=$_POST['top'];
 	$c=0;
-	print "year = ".$yy."<br>";
-	print "top = ".$top."<br>";
+	echo '<span style="color:red;font-family:Rockwell Extra Bold;">YOUR GIVEN YEAR :- </span>'.$yy."<br>"."<br>";
+	echo '<span style="color:blue;font-family:Rockwell Extra Bold;">TOP LIST NUMBER :- </span>'.$top."<br>"."<br>";
 	$st="male_cy$yy"."_top.csv";
-	echo $st."<br>";
+	echo '<span style="color:orange;font-family:Rockwell Extra Bold;">YOUR FILE IS :- </span>'.$st."<br>"."<br>";
 	$dir=opendir('C:\xampp\htdocs\mini');
-	if(is_dir($dir)!==FALSE)
-	{
 	while($file=readdir($dir)) 
 	{
 		if($file==$st)
@@ -40,7 +49,6 @@ function male()
 			$f=fopen("$file","r");
 			while(($line=fgetcsv($f))!==false)
 			{
-				
 				if($c<=$top)
 				{
 					echo"<tr>";
@@ -61,25 +69,15 @@ function male()
 		}	 
     	}
     	closedir($dir);
-	}
-	else
-	{
-		print "WRONG PATH IS GIVEN\n";
-		exit;
-	}
 }
-function female()
+function female($yy,$top)
 {
-	$yy=$_POST['yy'];
-	$top=$_POST['top'];
-        $c=0;
-	print "year = ".$yy."<br>";
-	print "top = ".$top."<br>";
+	$c=0;
+	echo '<span style="color:#AFA;font-family:Rockwell Extra Bold;">YOUR GIVEN YEAR = </span>'.$yy."<br>";
+	echo '<span style="color:#AFA;font-family:Rockwell Extra Bold;">TOP LIST NUMBER = </span>'.$top."<br>"; 
 	$st="female_cy$yy"."_top.csv";
-	echo $st."<br>";
+	echo "YOUR FILE NAME IS :- ".$st."<br>";
 	$dir=opendir('C:\xampp\htdocs\mini');
-	if(is_dir($dir)!==FALSE)
-	{
 	while($file=readdir($dir)) 
 	{
 		if($file==$st)
@@ -108,39 +106,31 @@ function female()
 		}
     	}
     	closedir($dir);
-	}
-	else
-	{
-		print "WRONG PATH IS GIVEN\n";
-		exit;
-	}
+	
 }
-function both()
+function both($yy,$top)
 {
-	$yy=$_POST['yy'];
-	$top=$_POST['top'];
-        $c=0;
-	print "year = ".$yy."<br>";
-	print "top = ".$top."<br>";
+	$c1=0;
+	$c2=0;
+	echo '<span style="color:#AFA;font-family:Rockwell Extra Bold;">YOUR GIVEN YEAR = </span>'.$yy."<br>";
+	echo '<span style="color:#AFA;font-family:Rockwell Extra Bold;">TOP LIST NUMBER = </span>'.$top."<br>";
 	$st1="male_cy$yy"."_top.csv";
 	$st2="female_cy$yy"."_top.csv";
-	echo $st1."<br>";
-	echo $st2."<br>";
+	echo "YOUR FIRST FILE NAME :- ".$st1."<br>";
+	echo "YOUR SECOND FILE NAME :- ".$st2."<br>";
 	$dir=opendir('C:\xampp\htdocs\mini');
-	if(is_dir($dir)!==FALSE)
-	{
 	while($file=readdir($dir)) 
 	{
 
-		if(($file==$st1)||($file==$st2))
+		if($file==$st1)
 		{ 
 			echo "<html><body><table>\n\n";
 			$f=fopen("$file","r");
 			while(($line=fgetcsv($f))!==false)
 			{
-				if($c<=$top)
+				if($c1<=$top)
 				{
-					echo"<tr>";
+					echo "<tr>";
 					foreach($line as $cell)
 					{
 						echo "<td>".htmlspecialchars($cell)."</td>";
@@ -151,21 +141,39 @@ function both()
 				{
 					break;
 				}
-				$c++;
+				$c1++;
 			}
 			fclose($f);
 			echo"\n</table></body></html>";
 		}
-			 
+		else if($file==$st2)
+		{
+			echo "<html><body><table>\n\n";
+			$f=fopen("$file","r");
+			while(($line=fgetcsv($f))!==false)
+			{
+				if($c2<=$top)
+				{
+					echo "<tr>";
+					foreach($line as $cell)
+					{
+						echo "<td>".htmlspecialchars($cell)."</td>";
+					}
+					echo "</tr>\n";
+				}
+				else
+				{
+					break;
+				}
+				$c2++;
+			}
+			fclose($f);
+			echo"\n</table></body></html>";	
+		}	 
     	}
     	closedir($dir);
-	}
-	else
-	{
-		print "WRONG PATH IS GIVEN\n";
-		exit;
-	}
 }
 ?>	
+</head>
 </body>
 </html>
